@@ -1,0 +1,37 @@
+/* blog-details.component.css */
+  .badge { padding: 10px 20px;  }
+  .blog-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  .navigation_btns a { display: flex; align-items: center; gap: 9px; font-size: 18px; font-weight: 600;  }
+  .navigation_btns i  { font-size: 30px;  }
+  
+  .blog-meta {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .blog-body {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  
+  .tags {
+    margin-top: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .blog-title {
+      font-size: 1.5rem;
+    }
+  
+    .blog-body {
+      font-size: 1rem;
+    }
+  }
+  
+
+  .blog_detail_con { margin-top: 16px; }
+.blog_detail_con { background: #fff; padding: 15px 15px;  border-radius: 10px; }

@@ -1,0 +1,79 @@
+
+
+<div *ngIf="data.openPop == 'editBlog' || data.openPop == 'createBlog'">
+  <div class="bp_popup_box">
+    <form [formGroup]="blogForm" (ngSubmit)="blogFormSubmit(blogForm)" class="mb-0 bp_field">
+      <div class="bp_popup_head">
+        <p class="bp_ph_tlt" >{{data.openPop=='editBlog' ? 'Edit' : 'Add'}} Blog</p>
+        <span class="material-icons bp_close_icn" (click)="onNoClick()">close</span>
+      </div>
+      <div class="bp_v_scroll">
+        <div class="bp_popup_body">
+          <p class="bp_input_lbl" >Title <span class="txt_d"> *</span>
+          </p>
+          <mat-form-field appearance="none">
+            <input matInput type="text" formControlName="title" placeholder="Enter Title" maxlength="65"
+              class="form-control bp_input" />
+            <mat-error *ngIf="submitted && blogForm.get('title').errors?.['required']" class="error_mess">Title
+              is required.</mat-error>
+              <mat-error *ngIf="submitted && blogForm.get('title').errors?.['maxlength']"
+              class="error_mess">Only 64 characters are allowed.</mat-error>
+          </mat-form-field>
+          <p class="bp_input_lbl" >Content <span class="txt_d"> *</span>
+          </p>
+          <mat-form-field appearance="none">
+            <input matInput type="text" formControlName="content" placeholder="Enter Content"
+              class="form-control bp_input" />
+            <mat-error *ngIf="submitted && blogForm.get('content').errors?.['required']" class="error_mess">Content
+              is required.</mat-error>
+            
+          </mat-form-field>
+
+          <p class="bp_input_lbl">Tag <span class="txt_d"> *</span></p>
+          <mat-form-field class="example-chip-list">
+            <mat-chip-list #chipList>
+              <mat-chip *ngFor="let tag of tags.controls; let i = index" [selectable]="selectable"
+                        [removable]="removable" (removed)="removeTag(i)">
+                {{ tag.value }}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input
+                     [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     (matChipInputTokenEnd)="addTag($event)">
+            </mat-chip-list>
+          </mat-form-field>
+          
+
+        </div>
+      </div>
+      <div class="bp_popup_footer">
+        <div class="bp_f_acn">
+          <button type="button" class="bp_btn btn_b" (click)="onNoClick()">Cancel</button>
+          <button type="submit" class="bp_btn" *ngIf="data.openPop=='editBlog'">Update</button>
+          <button type="submit" class="bp_btn" *ngIf="data.openPop =='createBlog'">Add</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="bp_popup_box" *ngIf="data.openPop=='deleteBlog'">
+  <div class="bp_popup_head">
+    <p class="bp_ph_tlt">Remove Blog</p>
+    <span class="material-icons bp_close_icn" (click)="onNoClick()">close</span>
+  </div>
+  <div class="bp_v_scroll">
+    <div class="bp_popup_body">
+      <p class="tlt_4 my-4 text-center">Do you want to remove blog.</p>
+    </div>
+  </div>
+  <div class="bp_popup_footer">
+    <div class="bp_f_acn">
+      <button type="button" class="bp_btn btn_b" (click)="onNoClick()">Cancel</button>
+      <button type="button" class="bp_btn" (click)="onYesClick()">Ok</button>
+    </div>
+  </div>
+</div>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px',fullScreenBackdrop:true }"></ngx-loading>

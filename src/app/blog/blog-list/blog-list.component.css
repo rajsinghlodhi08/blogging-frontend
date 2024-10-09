@@ -1,0 +1,90 @@
+.blog_lista_cards { border: 1px solid #d9d9d9; padding: 10px; border-radius: 10px; background: #fff; box-shadow: 0px 0px 17px 2px #0000001c; position: relative; }
+.author_name, .blog_crete_date { color: #818181; position: relative; }
+.blog_footer { border-top: 1px solid #818181; padding-top: 15px;   }
+.blog_description {
+  min-height: 80px;
+  max-height: 80px;
+}
+.blog_tags { font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
+.blog_title { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: calc(100% - 20px); }
+.blog_list_con { margin-top: 16px; }
+.blog_list_con { background: #fff; padding: 15px 0px;  border-radius: 10px; }
+.main_description { font-size: 18px; }
+span.blog_crete_date:before { content: "."; font-size: 48px; position: absolute; top: -14px; left: -12px; }
+.blog_add_btn { background: #f5821f; border: none; padding: 10px 54px; color: #fff; border-radius: 10px; }
+.dropdown_menu_card {
+  font-size: 20px;
+  color: #666;
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  cursor: pointer;
+}
+.card_menus { position: absolute; right: 8px; top: 24px; background: #fff; border: 1px solid #818181; border-radius: 5px; padding: 5px; display: none;  }
+  .menu_list { padding: 0;
+    list-style: none;
+    margin: 0px;  }
+    .menu_list li { padding: 5px 0px;
+      max-width: 100px;
+      width: 100px;
+      display: flex;
+      align-items: center;
+      gap: 5px; }
+
+      .blog_list_con .container .row { row-gap: 20px; }
+.input-wrapper {
+    position: relative;
+    width: 100%;
+  }
+  .dropdown_container .show { display: inline-block; }
+  
+  .form-control.bp_input {
+    width: 100%;
+    padding-right: 30px;
+    border-radius: 5px 0px 0px 5px;
+  }
+  .btn_search { border-radius: 0px 5px 5px 0px; }
+  .form-control.bp_input:focus { box-shadow: none; outline: none; }
+  .clear-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .clear-btn:focus {
+    outline: none;
+  }
+  .blog_delete {
+    border-bottom: 1px solid #818181;
+  }
+
+
+  
+/* 
+  .blog_description {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+  } */
+  
+  .read_more_btn {
+    background: none;
+    border: none;
+    color: #f5821f;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+    font: inherit; /* Inherit font styles from parent */
+  }
+  
+  .read_more_btn:hover {
+    text-decoration: none; /* Remove underline on hover */
+  }
+  

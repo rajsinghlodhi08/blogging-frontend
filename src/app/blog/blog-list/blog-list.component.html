@@ -1,0 +1,110 @@
+<div class="blog_list_con">
+  <div *ngIf="!skeletonLoader">
+    <div class="container">
+      <div class="mb-5">
+        <div class="d-flex align-items-center justify-content-between mb-1">
+          <h2>Blogs <span class="main_description">({{totalRecords}})</span></h2>
+          <button (click)="handleBlog('createBlog','','')" class="blog_add_btn" *ngIf="accessToken">Create Blog
+            Post</button>
+        </div>
+        <p class="main_description">This is for desctription</p>
+        <div class="row mt-4">
+          <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+            <div class="d-flex align-items-center gap-3">
+              <div class="input-wrapper mr-2">
+                <input matInput type="text" [(ngModel)]="title" placeholder="Search title"
+                  class="form-control bp_input" />
+                <!-- Cross Icon (X) -->
+                <button *ngIf="title" class="clear-btn" (click)="clearSearch()">
+                  &#x2715; <!-- Unicode for the X symbol -->
+                </button>
+              </div>
+              <div class="input-wrapper">
+                <input matInput type="text" [(ngModel)]="tags" placeholder="Search tags"
+                  class="form-control bp_input" />
+                <!-- Cross Icon (X) -->
+                <button *ngIf="tags" class="clear-btn" (click)="clearSearch()">
+                  &#x2715; <!-- Unicode for the X symbol -->
+                </button>
+              </div>
+              <button class="btn btn-secondary btn_search" *ngIf="tags.length > 0 || title.length > 0" (click)="onSearch()">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12"
+          *ngFor="let blogData of blogList; let i = index;">
+          <div class="blog_lista_cards">
+            <div class="dropdown_container" *ngIf="accessToken">
+              <!-- Icon to toggle the dropdown -->
+              <i class="fa-solid fa-ellipsis-stroke dropdown_menu_card" (click)="toggleDropdown(i)"></i>
+              <!-- Dropdown menu with conditional class to show/hide -->
+              <div class="card_menus" [ngClass]="{'show': selectedDropdown === i}">
+                <ul class="menu_list">
+                  <li class="cursor_p blog_delete" (click)="handleBlog('editBlog',blogData,i)">
+                    <i class="fa-duotone fa-solid fa-pencil"></i> Edit
+                  </li>
+                  <li class="cursor_p" (click)="handleBlog('deleteBlog',blogData,i)"> <i
+                      class="fa-duotone fa-solid fa-trash"></i>Delete</li>
+                </ul>
+              </div>
+            </div>
+            <div class="blog_content">
+              <h5 class="blog_title" matTooltip={{blogData.title}}>{{blogData?.title ? blogData?.title : '-'}}</h5>
+             
+              <!-- <p class="blog_description" matTooltip={{blogData.content}}>{{blogData?.content ? blogData.content : '-'}} -->
+              <!-- </p> -->
+
+              <p class="blog_description" [matTooltip]="blogData.content">
+                <span *ngIf="!isExpanded[i]; else expandedContent">
+                  {{ blogData?.content | slice:0:180 }} <!-- Adjust character count for truncation -->
+                </span>
+                <ng-template #expandedContent>
+                  {{ blogData?.content }}
+                </ng-template>
+                <button class="read_more_btn" (click)="toggle(i,blogData)" *ngIf="blogData.content.length > 180">
+                  {{ isExpanded[i] ? 'Read Less' : 'Read More' }}
+                </button>
+              </p>
+          
+              <p class="blog_tags"><span>{{ blogData.tags.join(', ')
+                  }}</span><span> </span></p>
+              <div class="blog_footer">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="d-flex align-items-center gap-3">
+                    <span class="author_name">{{blogData.username ? blogData.username :
+                      '-'}}</span>
+                    <span class="blog_crete_date">{{ blogData.createdAt ? (blogData.createdAt | date:
+                      'MMM dd, yyyy') : '-'}}</span>
+                  </div>
+                  <div class="d-flex align-items-center gap-3 pointer">
+                    <button class="txt_p" style="background: none;padding: 0px;border: none;" fdprocessedid="gfjj6"
+                      (click)="handleBlog('viewBlog',blogData,i)">More About Blog<i
+                        class="fa-duotone fa-solid fa-turn-right ms-2"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center"*ngIf="blogList.length > 0 && spinnerLoader">
+          <span class="spinner-border" role="status" style="color: #00B4FC;"></span>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="skt_eifr" *ngIf="skeletonLoader">
+  <div *ngFor="let fake of generateFakeSkeleton(8)">
+    <ngx-skeleton-loader count="1"
+      [theme]="{ width: '100%', height: '16px', margin: '0px 0 8px' }"></ngx-skeleton-loader>
+    <ngx-skeleton-loader count="1"
+      [theme]="{ width: '100%', height: '30px', margin: '0px 0 24px' }"></ngx-skeleton-loader>
+  </div>
+</div>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px',fullScreenBackdrop:true }"></ngx-loading>

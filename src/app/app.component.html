@@ -1,0 +1,18 @@
+<div class="bp_index_body">
+	<div class="bp_header_bar">
+		<app-header></app-header>
+	</div>
+	<div class="bp_proflie_info">
+	</div>
+	<div class="container">
+		<div class="bp_side_menu_overview">
+			<div class="bp_smo_l" *ngIf="isLoggedIn">
+				<app-sidebar class="sm_navbar_hide"></app-sidebar>
+			</div>
+			<div class="bp_smo_r">
+				<app-profile-top-section *ngIf="isLoggedIn"></app-profile-top-section>
+				<router-outlet></router-outlet>
+			</div>
+		</div>
+	</div>
+</div>

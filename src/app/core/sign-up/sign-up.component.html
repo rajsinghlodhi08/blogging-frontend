@@ -1,0 +1,68 @@
+<div class="signup_form_container">
+  <div class="form_con">
+    <div class="container">
+      <div class="form_box">
+        <form class="bp_field" [formGroup]="signUpForm" (ngSubmit)="signUpFormSubmit(signUpForm)">
+          <p class="form_tlt">
+            <span>Welcome to</span>
+            <span class="txt_p"> Blogging Platform</span>
+          </p>
+          <div class="row">
+            <div class="col-md-12">
+              <p class="bp_input_lbl">Username
+                 <span class="txt_d"> *</span></p>      
+              <mat-form-field appearance="none">
+                <input  matInput type="text" formControlName="username" placeholder="Enter Username" class="form-control bp_input" maxlength="65" autocomplete="off"/>
+                <!-- <input *ngIf="!signUpForm?.username"  matInput type="text" formControlName="username" placeholder="Enter User Name" class="form-control bp_input" maxlength="64"/> -->
+                <mat-error *ngIf="signUpForm.get('username').errors?.['required']" class="error_mess">Username is required.</mat-error>
+                <mat-error *ngIf="signUpForm.get('username').errors?.['maxlength']" class="error_mess">Only 64 characters are allowed.</mat-error>
+              </mat-form-field>
+              <p class="bp_input_lbl">Email<span class="txt_d"> *</span></p>
+              <mat-form-field appearance="none">
+                  <input matInput type="text" formControlName="email" 
+                  placeholder="Enter Email Address" maxlength="128" class="form-control bp_input" autocomplete="off"  />
+                <mat-error *ngIf="submitted && signUpForm.get('email').errors?.['required']" class="error_mess"> Email is required.</mat-error>
+                <mat-error *ngIf="signUpForm.get('email').errors?.['pattern']" class="error_mess">Please enter valid email address.</mat-error>
+                <mat-error *ngIf="(signUpForm.get('email').errors?.['maxlength']) && !(signUpForm.get('email').errors?.['pattern'])" class="error_mess">Email must not exceed 128 characters.</mat-error>
+              </mat-form-field>
+            </div>
+           
+            <div class="col-md-12 bp_pfix_sfix">
+              <p class="bp_input_lbl">Password<span class="txt_d"> *</span></p>
+              <mat-form-field appearance="none" class="ic_password">
+                <input matInput [type]="hide ? 'password' : 'text'" formControlName="password"  placeholder="Enter Password" class="form-control bp_input"  minlength="6" maxlength="16"/>
+                <mat-icon matSuffix  class="txt_lb password_icn" (click)="showHidePassword(hide);">{{ hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                <mat-error *ngIf="submitted && signUpForm.get('password').errors?.['required']" class="error_mess">Password is required.</mat-error>
+                <mat-error *ngIf="signUpForm.get('password').errors?.['minlength']" class="error_mess">Password must be at least 6 characters long.</mat-error>
+                <mat-error *ngIf="signUpForm.get('password').errors?.['maxlength']" class="error_mess">Only 16 characters are allowed.</mat-error>
+              </mat-form-field>
+              <small class="remember_password error_mess" *ngIf="loginmessageError">{{loginmessageError}}</small>
+            </div>   
+            <div class="col-md-12 bp_pfix_sfix">
+              <p class="bp_input_lbl">Role <span class="txt_d"> *</span></p>
+                <div class="country_code_fld">
+                <mat-select  formControlName="role" (selectionChange)="selectUserRole($event.value)"
+                    placeholder="Select Role" class="form-control custom_input">
+                    <mat-option value="author">
+                      Author
+                    </mat-option>
+                    <mat-option  value="admin">
+                      Admin
+                   </mat-option>
+                  </mat-select>
+                  </div>
+            </div>          
+            <div class="form_action">
+              <button class="bp_btn" type="submit">Sign Up</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <p class="acc_sign_up">
+        <span>Already have an account?</span> 
+        <span class="signup_txt" (click)="signIn()"> Sign in</span>
+      </p>
+    </div>
+  </div>
+</div>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px',fullScreenBackdrop:true }"></ngx-loading>

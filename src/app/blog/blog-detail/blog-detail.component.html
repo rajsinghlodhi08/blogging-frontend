@@ -1,0 +1,25 @@
+<!-- blog-details.component.html -->
+<div class="navigation_btns mt-3">
+  <a href="blog/list" style="text-decoration: none;" class="txt_p"><i class="fa-duotone fa-solid fa-arrow-left"></i>Back</a>
+</div>
+
+<div class="blog_detail_con">
+  <div *ngIf="!skeletonLoader">
+    <div class="blog-details-container container">
+      <div *ngIf="blogData" class="blog-content">
+        <h1 class="blog-title mb-4">{{ blogData.title }}</h1>
+        <div class="blog-meta">
+          <p>By <strong class="txt_p">{{ blogData.username }}</strong> | Views: {{ blogData.views }} | Created on: {{
+            blogData.createdAt | date:'longDate' }}</p>
+          <div class="tags">
+            <span class="badge bg_p me-2" *ngFor="let tag of blogData.tags">{{ tag }}</span>
+          </div>
+        </div>
+        <hr />
+        <div class="blog-body">
+          <p class="txt_lb">{{ blogData.content }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
